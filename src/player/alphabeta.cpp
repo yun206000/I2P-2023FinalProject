@@ -3,7 +3,7 @@
 
 #include "../config.hpp"
 #include "../state/state.hpp"
-#include "../policy/statevalue.hpp"
+#include "../policy/alphabeta.hpp"
 
 
 State* root;
@@ -34,7 +34,7 @@ void read_board(std::ifstream& fin) {
 
 
 /**
- * @brief choose a move and then write it into output file by state value function
+ * @brief choose a move and then write it into output file by alpha-beta algorithm
  * 
  * @param fout 
  */
@@ -42,7 +42,7 @@ void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   while(true) {
     // Choose a random spot.
-    auto move = State_value::get_move(root, 0);
+    auto move = Alpha_Beta::get_move(root, 3);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
     
