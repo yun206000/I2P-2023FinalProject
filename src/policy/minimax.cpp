@@ -24,7 +24,7 @@ Move Minimax::get_move(State *state, int depth){
   return actions[index];
 }
 
-int minimax(State *state, int depth, int maximizingPlayer){
+int Minimax::minimax(State *state, int depth, int maximizingPlayer){
   if(!state->legal_actions.size())
     state->get_legal_actions();
   if(depth == 0 || state->legal_actions.empty())
