@@ -3,7 +3,7 @@
 
 
 /**
- * @brief Policy class for statevalue policy, 
+ * @brief Policy class for state value policy, 
  * your policy class should have get_move method
  */
 class State_value{
