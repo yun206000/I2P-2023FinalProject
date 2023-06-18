@@ -15,13 +15,16 @@ Move Minimax::get_move(State *state, int depth){
     state->get_legal_actions();
   
   auto actions = state->legal_actions;
-  /*for(long unsigned int i = 0; i < actions.size(); i++){
-    
-  }*/
-  return actions[(rand()+depth)%actions.size()];
+  int max_value = -1 * MAX_VALUE, index = -1;
+  for(long unsigned int i = 0; i < actions.size(); i++){
+    int value = minimax(state->next_state(actions[i]), depth, false);
+    max_value = std::max(max_value, value);
+    if(max_value == value) index = i;
+  }
+  return actions[index];
 }
 
-int Minimax::minimax(State *state, int depth, int maximizingPlayer){
+int minimax(State *state, int depth, int maximizingPlayer){
   if(!state->legal_actions.size())
     state->get_legal_actions();
   if(depth == 0 || state->legal_actions.empty())
