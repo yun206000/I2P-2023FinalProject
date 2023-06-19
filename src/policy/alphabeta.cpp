@@ -23,7 +23,7 @@ Move Alpha_Beta::get_move(State *state, int depth){
     max_value = std::max(max_value, value);
     alpha = std::max(max_value, alpha);
     if(max_value == value) index = i;
-    std::cout<<"index: "<<index;
+    if(alpha > beta) break;
   }
   return actions[index];
 }
@@ -31,7 +31,7 @@ Move Alpha_Beta::get_move(State *state, int depth){
 int Alpha_Beta::alphabeta(State *state,int alpha, int beta, int depth, int maximizingPlayer){
   if(!state->legal_actions.size())
     state->get_legal_actions();
-  if(depth == 0 || state->legal_actions.empty())
+  if(depth == 0 || !state->legal_actions.size())
     return state->evaluate();
   int value; 
   if(maximizingPlayer){
@@ -40,7 +40,7 @@ int Alpha_Beta::alphabeta(State *state,int alpha, int beta, int depth, int maxim
       State* next_state = state->next_state(actions);
       value = std::max(value, alphabeta(next_state, alpha, beta, depth-1, false));
       alpha = std::max(alpha, value);
-      if(alpha >= beta) break;
+      if(alpha > beta) break;
     }
   }
   else{
@@ -49,7 +49,7 @@ int Alpha_Beta::alphabeta(State *state,int alpha, int beta, int depth, int maxim
       State* next_state = state->next_state(actions);
       value = std::min(value, alphabeta(next_state, alpha, beta, depth-1, true));
       beta = std::min(beta, value);
-      if(beta <= alpha) break;
+      if(beta < alpha) break;
     }
   }
   return value;
