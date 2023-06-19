@@ -9,7 +9,7 @@
 #define RANDOM_SEED 123
 #define timeout 10
 #define MAX_STEP 50
-#define MAX_VALUE 1e5
+#define MAX_VALUE 1e8
 
 /*Which character/words for pieces*/
 /* By default, the pieces are '♟', '♜', '♞', '♝', '♛', '♚' from unicode*/

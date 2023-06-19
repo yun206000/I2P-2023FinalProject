@@ -5,6 +5,55 @@
 #include "./state.hpp"
 #include "../config.hpp"
 
+static const int pawn_pos_value[6][5] = {
+0,  0,  0,  0,  0,
+50, 50, 50, 50, 50,
+30, 30, 20, 10, 10,
+5, -5, -10,  0,  0,
+5, 10, 10, -20,-20,
+0,  0,  0,  0,  0,
+};
+static const int knight_pos_value[6][5] = {
+-50,-40,-30,-40,-50,
+-40,-20,  0,-20,-40,
+-30, 15, 20, 15,-30,
+-30, 15, 20, 15,-30,
+-40,-20,  5,-20,-40,
+-50,-40,-30,-40,-50,
+};
+static const int bishop_pos_value[6][5] = {
+-20,-10,-10,-10,-20,
+-10,  0,  0,  0,-10,
+-10,  5, 10,  5,-10,
+-10, 10, 10, 10,-10,
+-10,  5,  0,  5,-10,
+-20,-10,-10,-10,-20,
+};
+static const int rook_pos_value[6][5] = {
+  0,  0,  0,  0,  0,
+  5, 10, 10, 10,  5,
+ -5,  0,  0,  0, -5,
+ -5,  0,  0,  0, -5,
+ -5,  0,  0,  0, -5,
+  0,  0,  5,  0,  0,
+};
+static const int queen_pos_value[6][5] = {
+-20,-10, -5,-10,-20,
+-10,  0,  0,  0,-10,
+ -5,  5,  5,  5, -5,
+ -5,  5,  5,  0, -5,
+-10,  0,  5,  0,-10,
+-20,-10, -5,-10,-20
+};
+static const int king_pos_value[6][5] = {
+-30,-40,-50,-40,-30,
+-30,-40,-50,-40,-30,
+-20,-30,-40,-30,-20,
+-10,-20,-20,-20,-10,
+ 20, 20,  0,  0,  0,
+ 20, 30, 10,  0,  0,
+};
+
 
 /**
  * @brief evaluate the state
@@ -24,44 +73,44 @@ int State::evaluate(){//(if you have more time) a piece in a different place has
       if((now_piece = self_board[i][j])){
         switch (now_piece){
           case 1: //pawn
-            self_value += 1;
+            self_value += 100 + pawn_pos_value[i][j];
             break;
           case 2: //rook
-            self_value += 5;
+            self_value += 500 + rook_pos_value[i][j];
             break;
           case 3: //knight
-            self_value += 3;
+            self_value += 320 + knight_pos_value[i][j];
             break;
           case 4: //bishop
-            self_value += 4;
+            self_value += 330 + bishop_pos_value[i][j];
             break;
           case 5: //queen
-            self_value += 9;
+            self_value += 900 + queen_pos_value[i][j];
             break;
           case 6: //king
-            self_value += MAX_VALUE;
+            self_value += 20000 + king_pos_value[i][j];
             break;
         }
       }
       else if((now_piece = oppn_board[i][j])){
         switch (now_piece){
           case 1: //pawn
-            oppn_value += 1;
+            oppn_value += 100 + pawn_pos_value[BOARD_H - i - 1][BOARD_W - j - 1];
             break;
           case 2: //rook
-            oppn_value += 5;
+            oppn_value += 500 + rook_pos_value[BOARD_H - i - 1][BOARD_W - j - 1];
             break;
           case 3: //knight
-            oppn_value += 3;
+            oppn_value += 320 + knight_pos_value[BOARD_H - i - 1][BOARD_W - j - 1];
             break;
           case 4: //bishop
-            oppn_value += 4;
+            oppn_value += 330 + bishop_pos_value[BOARD_H - i - 1][BOARD_W - j - 1];
             break;
           case 5: //queen
-            oppn_value += 9;
+            oppn_value += 900 + queen_pos_value[BOARD_H - i - 1][BOARD_W - j - 1];
             break;
           case 6: //king
-            oppn_value += MAX_VALUE;
+            oppn_value += 20000 + king_pos_value[BOARD_H - i - 1][BOARD_W - j - 1];
             break;
         }
       }
