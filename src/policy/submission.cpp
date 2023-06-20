@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include "../state/state.hpp"
-#include "./alphabeta.hpp"
+#include "./submission.hpp"
 
 /**
  * @brief Get a legal action by minimax algorithm
