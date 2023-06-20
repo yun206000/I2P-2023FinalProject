@@ -43,7 +43,7 @@ void write_valid_spot(std::ofstream& fout) {
   int depth = 1;
   while(true) {
     // Choose a random spot.
-    auto move = Alpha_Beta::get_move(root, depth);
+    auto move = Alpha_::get_move(root, depth);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
     depth += 1;

@@ -11,7 +11,7 @@
  * @param depth You may need this for other policy
  * @return Move 
  */
-Move Alpha_Beta::get_move(State *state, int depth){
+Move Alpha_::get_move(State *state, int depth){
   if(!state->legal_actions.size())
     state->get_legal_actions();
   
@@ -28,7 +28,7 @@ Move Alpha_Beta::get_move(State *state, int depth){
   return actions[index];
 }
 
-int Alpha_Beta::alphabeta(State *state,int alpha, int beta, int depth, bool maximizingPlayer){
+int Alpha_::alphabeta(State *state,int alpha, int beta, int depth, bool maximizingPlayer){
   if(!state->legal_actions.size())
     state->get_legal_actions();
   if(depth == 0 || !state->legal_actions.size())
