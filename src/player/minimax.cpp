@@ -49,7 +49,7 @@ void write_valid_spot(std::ofstream& fout) {
     depth+=1;
     // Remember to flush the output to ensure the last action is written to file.
     fout.flush();
-    break;
+    if(depth > 3) break;
   }
 }
 

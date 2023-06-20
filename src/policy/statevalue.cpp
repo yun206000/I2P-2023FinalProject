@@ -16,10 +16,11 @@ Move State_value::get_move(State *state, int depth){
     state->get_legal_actions();
   
   auto actions = state->legal_actions;
-  int max_value = -1 * MAX_VALUE, index = -1;
+  int max_value = -1 * MAX_VALUE, index = 0;
   for(long unsigned int i = 0; i < actions.size(); i++){
-    max_value = std::max(max_value, state->evaluate());
-    if(state->evaluate() == max_value) index = i;
+    State* next_state = state->next_state(actions[i]);
+    max_value = std::max(max_value, next_state->evaluate());
+    if(next_state->evaluate() == max_value) index = i;
   }
   return actions[index];
 }
